@@ -197,16 +197,42 @@ APK artifacts are build outputs and are not committed.
 | `a19b514` | feat: add app shell, router and foundation demo |
 | `a5dc6f1` | test: add foundation, chat, widget and app smoke tests |
 | `b62f38c` | docs: document architecture, chat module and contribution rules |
-| _see `git log`_ | chore: normalize line endings with .gitattributes |
-| _see `git log`_ | docs: add project report |
+| `57f5a4e` | chore: normalize line endings with .gitattributes |
+| `9684378` | docs: add project report |
+| (this commit) | docs: record final git verification in report |
 
 - Push #1 (`b81c55a..b62f38c`): `* [new branch] main -> main`, upstream set.
+- Push #2: `b62f38c..9684378  main -> main` (fetched first; local was `ahead 2`, no divergence).
+- Push #3: this report update (fast-forward).
 - Commit authorship uses the machine's global git identity.
 - Final verification output is recorded in §9.1 (filled after the last push).
 
 ### 9.1 Final sync verification
 
-_Filled in by the follow-up commit after the final push._
+After push #2 (`git fetch origin` first):
+
+```
+$ git status -sb
+## main...origin/main
+
+$ git log --oneline --decorate -n 10
+9684378 (HEAD -> main, origin/main) docs: add project report
+57f5a4e chore: normalize line endings with .gitattributes
+b62f38c docs: document architecture, chat module and contribution rules
+a5dc6f1 test: add foundation, chat, widget and app smoke tests
+a19b514 feat: add app shell, router and foundation demo
+a16732e feat: add generic chat module with replaceable providers
+c5ed501 feat: add auth, settings, profile, file and notification foundations
+2b72a0d feat: add reusable core foundation
+b81c55a chore: bootstrap Flutter project scaffold and tooling
+
+$ git rev-list --left-right --count main...origin/main
+0	0
+```
+
+`main` and `origin/main` both pointed to
+`96843783e4f3e3e62072686c014d0a0a16233ebf`. The commit that records this
+section is pushed the same way (push #3); check `git log -1` for its hash.
 
 ## 10. Known issues
 
