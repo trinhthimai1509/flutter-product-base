@@ -1,0 +1,8 @@
+{
+  "APP_ENV": "development",
+  "APP_NAME": "Flutter Base (Dev)",
+  "API_BASE_URL": "https://dev-api.example.com",
+  "USE_FAKE_BACKEND": true,
+  "ENABLE_NETWORK_LOGS": true,
+  "LOG_NETWORK_BODIES": false
+}

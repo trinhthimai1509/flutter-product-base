@@ -1,0 +1,8 @@
+{
+  "APP_ENV": "staging",
+  "APP_NAME": "Flutter Base (Staging)",
+  "API_BASE_URL": "https://staging-api.example.com",
+  "USE_FAKE_BACKEND": true,
+  "ENABLE_NETWORK_LOGS": true,
+  "LOG_NETWORK_BODIES": false
+}

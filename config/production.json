@@ -1,0 +1,8 @@
+{
+  "APP_ENV": "production",
+  "APP_NAME": "Flutter Base",
+  "API_BASE_URL": "https://api.example.com",
+  "USE_FAKE_BACKEND": true,
+  "ENABLE_NETWORK_LOGS": false,
+  "LOG_NETWORK_BODIES": false
+}
