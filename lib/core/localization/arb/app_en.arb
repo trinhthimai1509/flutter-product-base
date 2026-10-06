@@ -1,0 +1,126 @@
+{
+  "@@locale": "en",
+  "commonOk": "OK",
+  "commonCancel": "Cancel",
+  "commonConfirm": "Confirm",
+  "commonRetry": "Retry",
+  "commonClose": "Close",
+  "commonLoading": "Loading…",
+  "commonEmpty": "Nothing here yet",
+  "commonErrorTitle": "Something went wrong",
+  "errorNetwork": "No internet connection. Check your network and try again.",
+  "errorTimeout": "The request took too long. Please try again.",
+  "errorUnauthorized": "Your session has expired. Please sign in again.",
+  "errorForbidden": "You don't have permission to do this.",
+  "errorNotFound": "The requested item could not be found.",
+  "errorValidation": "Some information is invalid. Please check and try again.",
+  "errorServer": "The server had a problem. Please try again later.",
+  "errorStorage": "Could not access device storage.",
+  "errorUnknown": "An unexpected error occurred.",
+  "authSignInTitle": "Welcome",
+  "authSignInSubtitle": "Sign in to continue",
+  "authEmailLabel": "Email",
+  "authPasswordLabel": "Password",
+  "authSignInButton": "Sign in",
+  "authContinueAsGuest": "Continue as guest",
+  "authEmailInvalid": "Enter a valid email address",
+  "authPasswordTooShort": "Password must be at least {min} characters",
+  "@authPasswordTooShort": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "authDemoHint": "Demo mode: any email and a password of 6+ characters works.",
+  "authSignOut": "Sign out",
+  "authSignOutConfirmTitle": "Sign out?",
+  "authSignOutConfirmMessage": "You will need to sign in again to continue.",
+  "authGuestName": "Guest",
+  "homeTitle": "Home",
+  "homeGreeting": "Hello, {name}",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeSubtitle": "This base app demonstrates reusable foundation modules.",
+  "homeChatTitle": "Chat demo",
+  "homeChatSubtitle": "Generic chat engine with a mock provider",
+  "homeSettingsTitle": "Settings",
+  "homeSettingsSubtitle": "Theme, language and app info",
+  "homeShowcaseTitle": "Foundation showcase",
+  "homeShowcaseSubtitle": "Design system components and states",
+  "homeProfileTitle": "Profile",
+  "homeProfileSubtitle": "Current user and session",
+  "settingsTitle": "Settings",
+  "settingsAppearance": "Appearance",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsLanguage": "Language",
+  "settingsLanguageSystem": "System default",
+  "settingsAbout": "About",
+  "settingsAppName": "App name",
+  "settingsVersion": "Version",
+  "settingsEnvironment": "Environment",
+  "settingsAccount": "Account",
+  "profileTitle": "Profile",
+  "profileUserId": "User ID",
+  "profileEmail": "Email",
+  "profileNoEmail": "Not provided",
+  "profileGuestBadge": "Guest session",
+  "chatTitle": "Conversations",
+  "chatEmptyConversations": "No conversations yet",
+  "chatEmptyMessages": "No messages yet. Say hello!",
+  "chatComposerHint": "Type a message",
+  "chatSend": "Send",
+  "chatAttach": "Attach file",
+  "chatStop": "Stop generating",
+  "chatRegenerate": "Regenerate",
+  "chatFailed": "Not sent. Tap to retry.",
+  "chatReplyingTo": "Replying to {name}",
+  "@chatReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatReply": "Reply",
+  "chatCancelReply": "Cancel reply",
+  "chatTyping": "{name} is typing…",
+  "@chatTyping": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatSources": "Sources",
+  "chatYou": "You",
+  "chatDemoHint": "Tip: include \"/fail\" in a message to simulate a failed send.",
+  "chatUploading": "Uploading…",
+  "notFoundTitle": "Page not found",
+  "notFoundMessage": "The page you are looking for does not exist.",
+  "notFoundGoHome": "Go to home",
+  "showcaseTitle": "Foundation showcase",
+  "showcaseButtons": "Buttons",
+  "showcasePrimary": "Primary",
+  "showcaseSecondary": "Secondary",
+  "showcaseTextButton": "Text",
+  "showcaseInputs": "Inputs",
+  "showcaseSampleInput": "Sample input",
+  "showcaseStates": "States",
+  "showcaseFeedback": "Feedback",
+  "showcaseShowDialog": "Show dialog",
+  "showcaseDialogMessage": "This is a reusable confirmation dialog.",
+  "showcaseShowSnackbar": "Show snackbar",
+  "showcaseSnackbarMessage": "This is a reusable snackbar.",
+  "showcaseSendNotification": "Send in-app notification",
+  "showcaseNotificationTitle": "Hello from the notification center",
+  "showcaseNotificationBody": "In-app notifications are delivered through a replaceable service.",
+  "showcaseAttachments": "Attachments"
+}
