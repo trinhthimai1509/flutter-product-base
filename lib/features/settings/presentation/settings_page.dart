@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pb_billing/pb_billing.dart';
+import 'package:pb_review/pb_review.dart';
 
+import '../../../app/router/app_routes.dart';
+import '../../../core/capabilities/capability_providers.dart';
 import '../../../core/di/core_providers.dart';
 import '../../../core/localization/l10n.dart';
 import '../../../core/theme/app_tokens.dart';
 import '../../../shared/widgets/app_feedback.dart';
 import '../../../shared/widgets/responsive.dart';
+import '../../../shared/widgets/section_header.dart';
+import '../../../shared/widgets/status_badges.dart';
 import '../../auth/application/auth_providers.dart';
 import '../../auth/domain/auth_state.dart';
+import '../../onboarding/application/onboarding_providers.dart';
 import '../application/settings_controller.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -21,6 +29,16 @@ class SettingsPage extends ConsumerWidget {
     final config = ref.watch(appConfigProvider);
     final info = ref.watch(appInfoProvider);
     final isSignedIn = ref.watch(authControllerProvider) is Authenticated;
+    final dynamicColorSupported = ref.watch(dynamicColorSupportedProvider);
+    final billing = ref.watch(billingManagerProvider);
+    final ads = ref.watch(adsControllerProvider);
+    final external = ref.watch(externalActionsProvider);
+
+    Future<void> open(String url) async {
+      if (!await external.openUrl(url) && context.mounted) {
+        context.showAppSnackBar(l10n.settingsLinkFailed);
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
@@ -28,7 +46,24 @@ class SettingsPage extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
           children: [
-            _SectionHeader(l10n.settingsAppearance),
+            ValueListenableBuilder<PurchaseState>(
+              valueListenable: billing.purchaseState,
+              builder: (context, state, _) {
+                final owned = state == PurchaseState.purchased;
+                return ListTile(
+                  leading: const Icon(Icons.workspace_premium_outlined),
+                  title: Text(
+                    owned ? l10n.settingsPremiumActive : l10n.settingsPremium,
+                  ),
+                  subtitle: owned ? null : Text(l10n.settingsPremiumSubtitle),
+                  trailing: owned
+                      ? const PremiumBadge()
+                      : const Icon(Icons.chevron_right),
+                  onTap: () => context.push(AppRoutes.premium),
+                );
+              },
+            ),
+            SectionHeader(l10n.settingsAppearance),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.lg,
@@ -56,7 +91,15 @@ class SettingsPage extends ConsumerWidget {
                 onSelectionChanged: (s) => controller.setThemeMode(s.first),
               ),
             ),
-            _SectionHeader(l10n.settingsLanguage),
+            if (dynamicColorSupported)
+              SwitchListTile(
+                secondary: const Icon(Icons.palette_outlined),
+                title: Text(l10n.settingsDynamicColor),
+                subtitle: Text(l10n.settingsDynamicColorSubtitle),
+                value: settings.useDynamicColor,
+                onChanged: controller.setUseDynamicColor,
+              ),
+            SectionHeader(l10n.settingsLanguage),
             RadioGroup<String>(
               groupValue: settings.locale?.languageCode ?? '',
               onChanged: (code) => controller.setLocale(
@@ -76,7 +119,29 @@ class SettingsPage extends ConsumerWidget {
                 ],
               ),
             ),
-            _SectionHeader(l10n.settingsAbout),
+            SectionHeader(l10n.settingsNotifications),
+            SwitchListTile(
+              secondary: const Icon(Icons.notifications_outlined),
+              title: Text(l10n.settingsNotifications),
+              subtitle: Text(l10n.settingsNotificationsSubtitle),
+              value: settings.notificationsEnabled,
+              onChanged: (enabled) async {
+                await controller.setNotificationsEnabled(enabled);
+                if (!enabled) return;
+                // Turning the app switch on is the moment to ask the OS.
+                final notifications = ref.read(localNotificationsProvider);
+                final granted =
+                    await notifications.canPostNotifications() ||
+                    await notifications.requestPermission();
+                if (!granted && context.mounted) {
+                  context.showAppSnackBar(
+                    l10n.settingsNotificationsDenied,
+                    type: AppSnackType.error,
+                  );
+                }
+              },
+            ),
+            SectionHeader(l10n.settingsAbout),
             ListTile(
               leading: const Icon(Icons.apps),
               title: Text(l10n.settingsAppName),
@@ -92,8 +157,46 @@ class SettingsPage extends ConsumerWidget {
               title: Text(l10n.settingsEnvironment),
               trailing: Text(config.environment.name),
             ),
+            ListTile(
+              leading: const Icon(Icons.star_outline),
+              title: Text(l10n.settingsRateApp),
+              onTap: () async {
+                final review = ref.read(appReviewManagerProvider);
+                if (await review.requestReview() == ReviewOutcome.unavailable) {
+                  await review.openStoreListing();
+                }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share_outlined),
+              title: Text(l10n.settingsShareApp),
+              onTap: () =>
+                  external.shareText(l10n.settingsShareMessage(config.appName)),
+            ),
+            if (config.privacyPolicyUrl case final url?)
+              ListTile(
+                leading: const Icon(Icons.policy_outlined),
+                title: Text(l10n.settingsPrivacyPolicy),
+                trailing: const Icon(Icons.open_in_new),
+                onTap: () => open(url),
+              ),
+            ValueListenableBuilder<bool>(
+              valueListenable: ads.privacyOptionsRequired,
+              builder: (context, required, _) => required
+                  ? ListTile(
+                      leading: const Icon(Icons.privacy_tip_outlined),
+                      title: Text(l10n.settingsPrivacyOptions),
+                      onTap: ads.showPrivacyOptions,
+                    )
+                  : const SizedBox.shrink(),
+            ),
+            ListTile(
+              leading: const Icon(Icons.replay),
+              title: Text(l10n.settingsReplayOnboarding),
+              onTap: () => ref.read(onboardingControllerProvider).reset(),
+            ),
             if (isSignedIn) ...[
-              _SectionHeader(l10n.settingsAccount),
+              SectionHeader(l10n.settingsAccount),
               ListTile(
                 leading: Icon(
                   Icons.logout,
@@ -126,29 +229,4 @@ class SettingsPage extends ConsumerWidget {
     'vi' => 'Tiếng Việt',
     _ => locale.toLanguageTag(),
   };
-}
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader(this.title);
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.lg,
-        AppSpacing.lg,
-        AppSpacing.xs,
-      ),
-      child: Text(
-        title,
-        style: theme.textTheme.titleSmall?.copyWith(
-          color: theme.colorScheme.primary,
-        ),
-      ),
-    );
-  }
 }

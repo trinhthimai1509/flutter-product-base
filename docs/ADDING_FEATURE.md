@@ -196,3 +196,19 @@ Tips:
 Delete `lib/features/<name>/`, its routes, links (e.g. in `HomePage`), ARB
 keys, tests and any bootstrap overrides. Run analyze — the compiler will show
 any remaining references.
+
+## Adding or removing a capability package
+
+Add one when the capability needs a vendor SDK or only some products want
+it (see AGENTS.md › Capability package rules):
+
+1. `packages/pb_<name>/` with `pubspec.yaml` (`resolution: workspace`,
+   `publish_to: none`), `analysis_options.yaml` including the root one,
+   `lib/pb_<name>.dart` exporting `src/`, and `test/`.
+2. Add it to `workspace:` and `dependencies:` in the root `pubspec.yaml`.
+3. Contract + implementation + `Fake…`; outcomes instead of exceptions.
+4. Providers in `lib/core/capabilities/capability_providers.dart`; the fake
+   in `test/helpers/test_helpers.dart` › `baseTestOverrides`.
+5. A section in `docs/MODULE_CATALOG.md` (API, wiring, native setup).
+
+To remove one, follow MODULE_CATALOG.md › Removing a package from an app.

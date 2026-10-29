@@ -27,6 +27,12 @@ class AppConfig {
     this.enableNetworkLogs = false,
     this.logNetworkBodies = false,
     this.useFakeBackend = false,
+    this.enableFirebase = false,
+    this.adsEnabled = false,
+    this.useFakeBilling = true,
+    this.proProductId = 'pro',
+    this.appStoreId,
+    this.privacyPolicyUrl,
   });
 
   /// Reads configuration from compile-time environment declarations.
@@ -67,8 +73,25 @@ class AppConfig {
         'USE_FAKE_BACKEND',
         defaultValue: true,
       ),
+      enableFirebase: const bool.fromEnvironment('ENABLE_FIREBASE'),
+      adsEnabled: const bool.fromEnvironment('ADS_ENABLED'),
+      useFakeBilling: const bool.fromEnvironment(
+        'USE_FAKE_BILLING',
+        defaultValue: true,
+      ),
+      proProductId: const String.fromEnvironment(
+        'PRO_PRODUCT_ID',
+        defaultValue: 'pro',
+      ),
+      appStoreId: _optional(const String.fromEnvironment('APP_STORE_ID')),
+      privacyPolicyUrl: _optional(
+        const String.fromEnvironment('PRIVACY_POLICY_URL'),
+      ),
     );
   }
+
+  static String? _optional(String value) =>
+      value.trim().isEmpty ? null : value.trim();
 
   final AppEnvironment environment;
   final String appName;
@@ -81,6 +104,27 @@ class AppConfig {
   /// When true, features use in-process fake data sources instead of HTTP.
   /// Lets the base run without a backend; turn off once an API exists.
   final bool useFakeBackend;
+
+  /// Initialize Firebase telemetry (pb_telemetry_firebase). Needs
+  /// `flutterfire configure`; without it telemetry falls back to no-op.
+  final bool enableFirebase;
+
+  /// Show ads (pb_ads). Uses Google test units until you set your own in
+  /// `adsConfigProvider`.
+  final bool adsEnabled;
+
+  /// Use the in-process billing fake instead of Play/App Store (pb_billing).
+  final bool useFakeBilling;
+
+  /// Non-consumable "Pro" product id, same in Play Console and App Store
+  /// Connect.
+  final String proProductId;
+
+  /// Numeric App Store id, for "Rate this app" on iOS.
+  final String? appStoreId;
+
+  /// Shown in Settings › About when set.
+  final String? privacyPolicyUrl;
 
   bool get isProduction => environment == AppEnvironment.production;
   bool get isDevelopment => environment == AppEnvironment.development;

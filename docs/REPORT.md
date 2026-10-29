@@ -1,8 +1,69 @@
 # REPORT — Flutter Project Base
 
 Date: 2026-10-06 · Author: Claude (AI coding agent), working unattended
+Updated: 2026-10-29 · capability packages (see §0)
 
 ---
+
+## 0. Update 2026-10-29: capability packages
+
+Goal: close the gaps with `android-product-base` (the reference base, 15
+Gradle modules), keeping each capability opt-in.
+
+**Approach (owner's choice):** a Dart pub workspace with one package per
+capability under `packages/`, mirroring Android's per-module opt-in. Each
+package is plain Dart/Flutter (contract + plugin implementation + fake), no
+Riverpod and no app imports. The app wires them in
+`lib/core/capabilities/capability_providers.dart`.
+
+| android-product-base | Flutter equivalent | Status |
+| --- | --- | --- |
+| `core:common` (Logger, PremiumState) | `pb_common` | DONE |
+| `core:telemetry` | `pb_telemetry` | DONE |
+| `core:telemetry-firebase` | `pb_telemetry_firebase` | DONE (off by default; needs `flutterfire configure`) |
+| `core:network` › NetworkMonitor | `pb_connectivity` + offline banner | DONE |
+| `core:notification` (channels, permission, reminders) | `pb_notifications` | DONE (local; push still an interface) |
+| `core:review` | `pb_review` | DONE |
+| `core:billing` | `pb_billing` | DONE (fake by default in dev/staging) |
+| `feature:premium` | `pb_premium` + `features/premium` | DONE |
+| `core:ads` (AdMob + UMP, throttling) | `pb_ads` | DONE (Google test units) |
+| `feature:onboarding` | `pb_onboarding` + `features/onboarding` | DONE |
+| `feature:settings` (theme, dynamic color, share, open URL, rows) | Settings page + `ExternalActions` | DONE |
+| `core:designsystem` (semantic colors, PremiumBadge, SectionHeader) | `AppSemanticColors`, `PremiumBadge`, `SectionHeader`, `OfflineBanner` | DONE |
+| `core:datastore` (onboarding, notifications, dynamic color prefs) | `KeyValueStore` keys + `AppSettings` | DONE |
+| `core:testing` | `test/helpers/test_helpers.dart` + `Fake…` in each package | DONE |
+| CI workflow | `.github/workflows/ci.yml` | DONE |
+| MODULE_CATALOG, MONETIZATION, THEMING, NEW_APP_CHECKLIST | `docs/` | DONE |
+| `core:database` (Room converters) | — | Not applicable: no database by design (§11) |
+| Composite build / VERSIONING | — | Not applicable: the Flutter base is copied or used via path/git deps |
+
+Flutter-only modules with no Android counterpart are unchanged: auth, chat,
+profile, files, localization, route guard.
+
+**Decisions made in this update**
+
+| Decision | Reason |
+| --- | --- |
+| Packages expose `ChangeNotifier`/`ValueListenable`, not Riverpod | Usable by any app; Riverpod stays in the app |
+| Billing behind a small `StoreGateway` | Purchase/restore logic is unit-tested without the plugin |
+| iOS does not restore at launch; `OwnershipCache` remembers Pro | A restore can prompt for the Apple ID password |
+| Dynamic color via `ColorScheme.fromSeed(wallpaper primary)` | `dynamic_color` 2.1 returns `material_ui` types that do not match `flutter/material` |
+| Reminders are inexact (`inexactAllowWhileIdle`) | Exact alarms need a separate permission/policy review (same as Android base) |
+| Firebase gated by `ENABLE_FIREBASE` and options from `flutterfire configure` | No Gradle plugin guesses; a fresh clone never touches Firebase |
+| Ads enabled with Google test units in dev/staging, off in production | Safe default until real units exist |
+| Onboarding redirect runs before the auth guard, after the session is known | Splash still covers start-up |
+
+**Known issues added**
+
+1. Notification taps open in-app paths only; a deep link that was waiting
+   behind onboarding is not preserved (sign-in still preserves `from=`).
+2. The Android build prints "Built-in Kotlin" migration warnings for some
+   plugins (plugin-side; builds succeed).
+3. iOS was not built in this update; the native setup follows the
+   plugins' documentation. Android: debug APK built and launched on an
+   Android 15 emulator (onboarding shown, no crash with the AdMob test id).
+4. On exFAT/FAT drives, macOS `._*` files break `flutter test` and
+   `gen-l10n`: run `dot_clean -m .` (git already ignores them).
 
 ## 1. Executive summary
 
@@ -96,13 +157,14 @@ Legend: **DONE** = implemented, wired and tested/working ·
 | Navigation | DONE | go_router, auth guard, guest-only route, deep-link `from=` preservation, open-redirect protection, nested routes, 404 page. Bottom-nav shell not added (not needed by demo) |
 | Design system | DONE | M3 theme from seed, light/dark/system, typography tweaks, spacing/radius/breakpoints, `AppButton`, `AppTextField`, loading/empty/error views, confirm dialog, snackbar helper, `ResponsiveCenter`, responsive home grid |
 | Localization | DONE | ARB EN (template) + VI complete (95 keys), iOS `CFBundleLocalizations` set, guide in README |
-| Settings | DONE | theme mode, language (incl. system), app name/version/environment, sign out with confirm; persisted |
+| Settings | DONE | theme mode, dynamic color, language (incl. system), notifications switch (asks permission), Pro row, ads privacy options, rate/share app, privacy policy link, replay onboarding, app name/version/environment, sign out with confirm; persisted |
 | Profile | PARTIAL | `UserProfile` + repository built from the auth session and a profile page. No remote `GET /me` or edit (no backend contract yet) |
 | File / media | PARTIAL | `Attachment` (kind, MIME, size, local/remote source, upload status/progress, media info), MIME helpers, `FileUploader`/`AttachmentPicker` contracts, fake uploader + demo picker, upload pipeline used by chat. No real picker or storage vendor (needs native plugins/backend) |
-| Notification | PARTIAL | Domain (`AppNotification`, channels) + interfaces for local/push/in-app. In-app center **implemented** and shown via snackbar (demo button). Local/push are no-op implementations (need plugins/Firebase credentials) |
+| Notification | DONE (local) / PARTIAL (push) | In-app center shown via snackbar. Local notifications, channels, permission and reminders via `pb_notifications` (§0). Push is still an interface with a no-op (needs Firebase credentials) |
+| Capability packages | DONE | 10 packages in `packages/` (§0, docs/MODULE_CATALOG.md) |
 | Chat | DONE (engine) / PARTIAL (real transports) | See §5 |
-| Testing | DONE | 86 tests: unit, widget, app smoke |
-| Documentation | DONE | README, AGENTS.md (+ CLAUDE.md pointer), ARCHITECTURE, CHAT_MODULE, ADDING_FEATURE, REPORT |
+| Testing | DONE | 97 app tests (unit, widget, app smoke incl. capability flows) + 36 package tests |
+| Documentation | DONE | README, AGENTS.md (+ CLAUDE.md pointer), ARCHITECTURE, CHAT_MODULE, ADDING_FEATURE, MODULE_CATALOG, MONETIZATION, THEMING, NEW_APP_CHECKLIST, REPORT |
 
 ## 5. Chat module
 

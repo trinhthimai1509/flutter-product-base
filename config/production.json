@@ -4,5 +4,11 @@
   "API_BASE_URL": "https://api.example.com",
   "USE_FAKE_BACKEND": true,
   "ENABLE_NETWORK_LOGS": false,
-  "LOG_NETWORK_BODIES": false
+  "LOG_NETWORK_BODIES": false,
+  "ENABLE_FIREBASE": false,
+  "ADS_ENABLED": false,
+  "USE_FAKE_BILLING": false,
+  "PRO_PRODUCT_ID": "pro",
+  "APP_STORE_ID": "",
+  "PRIVACY_POLICY_URL": "https://example.com/privacy"
 }

@@ -15,7 +15,8 @@ point here instead and implement it in the app.
 ## Before you start
 
 1. Read `README.md`, `docs/ARCHITECTURE.md` and, for chat work,
-   `docs/CHAT_MODULE.md`.
+   `docs/CHAT_MODULE.md`. For anything in `packages/`, read
+   `docs/MODULE_CATALOG.md`.
 2. Check `docs/REPORT.md` for current status and known issues.
 3. Follow the checklists in `docs/ADDING_FEATURE.md`.
 
@@ -31,6 +32,7 @@ point here instead and implement it in the app.
   features → core, shared
   core → (nothing in features)        shared → core only
   app/ (composition root) → everything
+  lib/ → packages/pb_*                 packages/pb_* → pb_common only
   ```
 
   - `domain/` is pure Dart: no Flutter widgets, no Dio, no Riverpod, no
@@ -56,6 +58,24 @@ point here instead and implement it in the app.
   after sign-in/out manually — the guard reacts to auth state.
 - Don't create abstractions without a real second implementation or test
   seam. Don't create empty folders "for architecture".
+
+## Capability package rules (`packages/pb_*`)
+
+- A capability that pulls in a vendor SDK or that only some products need
+  (ads, billing, telemetry, notifications, review, onboarding...) is a
+  package, not a feature. The app must keep working when it is deleted.
+- Packages are plain Dart/Flutter: **no Riverpod, no imports from `lib/`**,
+  no dependency on another capability package (`pb_common` is shared;
+  `pb_premium` builds on `pb_billing`).
+- Each capability ships an interface, the plugin-backed implementation and
+  a `Fake…`. No vendor type crosses the package's public API.
+- "Not available" is a value, never an exception (no store, no consent, no
+  Firebase config, unsupported platform).
+- Packages own no user-facing strings: widgets take labels with English
+  defaults; the app passes ARB strings.
+- Wire packages only in `lib/core/capabilities/capability_providers.dart`;
+  tests replace them via `baseTestOverrides` (fakes, no plugins).
+- Document the API, wiring and native setup in `docs/MODULE_CATALOG.md`.
 
 ## Chat module rules
 
@@ -109,11 +129,15 @@ point here instead and implement it in the app.
 
 ```bash
 flutter pub get
-dart format lib test
-flutter analyze            # must report: No issues found!
-flutter test               # all green
+dart format lib test packages
+flutter analyze            # app + packages; must report: No issues found!
+flutter test               # app tests, all green
+for p in packages/*/; do (cd "$p" && flutter test); done   # package tests
 flutter build apk --debug --dart-define-from-file=config/development.json
 ```
+
+On macOS with the repo on an exFAT/FAT drive, run `dot_clean -m .` first:
+Finder's `._*` files break `flutter test` and `flutter gen-l10n`.
 
 Then audit the diff: `git status`, `git diff`, `git diff --cached` — look for
 secrets, absolute local paths, build outputs.

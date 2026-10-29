@@ -26,4 +26,14 @@ class SettingsController extends Notifier<AppSettings> {
     state = state.copyWith(locale: () => locale);
     await ref.read(settingsRepositoryProvider).saveLocale(locale);
   }
+
+  Future<void> setUseDynamicColor(bool value) async {
+    state = state.copyWith(useDynamicColor: value);
+    await ref.read(settingsRepositoryProvider).saveUseDynamicColor(value);
+  }
+
+  Future<void> setNotificationsEnabled(bool value) async {
+    state = state.copyWith(notificationsEnabled: value);
+    await ref.read(settingsRepositoryProvider).saveNotificationsEnabled(value);
+  }
 }

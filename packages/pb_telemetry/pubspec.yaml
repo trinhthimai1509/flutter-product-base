@@ -1,0 +1,17 @@
+name: pb_telemetry
+description: "Analytics and crash-reporting contracts with no-op and recording implementations."
+publish_to: 'none'
+version: 0.1.0
+resolution: workspace
+
+environment:
+  sdk: ^3.13.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter

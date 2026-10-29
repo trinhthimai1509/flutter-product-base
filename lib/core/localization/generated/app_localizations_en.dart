@@ -309,4 +309,267 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get showcaseAttachments => 'Attachments';
+
+  @override
+  String get offlineBanner => 'You\'re offline. Some features may not work.';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingFinish => 'Get started';
+
+  @override
+  String onboardingPageIndicator(int current, int total) {
+    return 'Page $current of $total';
+  }
+
+  @override
+  String get onboardingPage1Title => 'A foundation, not a product';
+
+  @override
+  String get onboardingPage1Body =>
+      'Auth, networking, chat, settings and more, ready to build on.';
+
+  @override
+  String get onboardingPage2Title => 'Pick what you need';
+
+  @override
+  String get onboardingPage2Body =>
+      'Ads, billing, notifications and telemetry are opt-in packages.';
+
+  @override
+  String get onboardingPage3Title => 'Runs offline';
+
+  @override
+  String get onboardingPage3Body =>
+      'Fakes stand in for every backend and store until yours are ready.';
+
+  @override
+  String get premiumTitle => 'Pro';
+
+  @override
+  String get premiumHeadline => 'Go Pro';
+
+  @override
+  String get premiumSubtitle => 'One purchase, yours forever.';
+
+  @override
+  String get premiumBenefitNoAds => 'No ads';
+
+  @override
+  String get premiumBenefitFeatures => 'Every premium feature';
+
+  @override
+  String get premiumBenefitSupport => 'Support future development';
+
+  @override
+  String get premiumFootnote => 'One-time purchase. No subscription.';
+
+  @override
+  String premiumBuy(String price) {
+    return 'Get Pro for $price';
+  }
+
+  @override
+  String get premiumUnavailable => 'Not available right now';
+
+  @override
+  String get premiumRestore => 'Restore purchase';
+
+  @override
+  String get premiumOwned => 'You have Pro. Thank you!';
+
+  @override
+  String get premiumPending =>
+      'Payment pending. Pro unlocks when it completes.';
+
+  @override
+  String get premiumMsgCompleted => 'Welcome to Pro!';
+
+  @override
+  String get premiumMsgPending => 'Payment pending.';
+
+  @override
+  String get premiumMsgAlreadyOwned => 'You already own Pro.';
+
+  @override
+  String get premiumMsgRestored => 'Purchase restored.';
+
+  @override
+  String get premiumMsgNothingToRestore => 'No previous purchase found.';
+
+  @override
+  String get premiumMsgCouldNotCheck => 'Couldn\'t reach the store. Try again.';
+
+  @override
+  String get premiumMsgFailed => 'Purchase failed. You were not charged.';
+
+  @override
+  String get settingsDynamicColor => 'Dynamic color';
+
+  @override
+  String get settingsDynamicColorSubtitle => 'Use colors from your wallpaper';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsNotificationsSubtitle => 'Reminders and updates';
+
+  @override
+  String get settingsNotificationsDenied =>
+      'Notifications are blocked. Allow them in system settings.';
+
+  @override
+  String get settingsPremium => 'Get Pro';
+
+  @override
+  String get settingsPremiumSubtitle => 'Remove ads and unlock everything';
+
+  @override
+  String get settingsPremiumActive => 'Pro is active';
+
+  @override
+  String get settingsPrivacyOptions => 'Privacy options';
+
+  @override
+  String get settingsRateApp => 'Rate this app';
+
+  @override
+  String get settingsShareApp => 'Share this app';
+
+  @override
+  String settingsShareMessage(String appName) {
+    return 'I\'m using $appName.';
+  }
+
+  @override
+  String get settingsPrivacyPolicy => 'Privacy policy';
+
+  @override
+  String get settingsReplayOnboarding => 'Replay introduction';
+
+  @override
+  String get settingsLinkFailed => 'Couldn\'t open the link.';
+
+  @override
+  String get homeCapabilitiesTitle => 'Capabilities';
+
+  @override
+  String get homeCapabilitiesSubtitle =>
+      'Ads, billing, notifications, review, telemetry';
+
+  @override
+  String get notificationChannelReminders => 'Reminders';
+
+  @override
+  String get notificationChannelRemindersDescription =>
+      'Reminders you schedule in the app';
+
+  @override
+  String get notificationDemoTitle => 'Hello from Flutter Base';
+
+  @override
+  String get notificationDemoBody => 'Tap to open the capabilities demo.';
+
+  @override
+  String get capConnectivity => 'Connectivity';
+
+  @override
+  String get capOnline => 'Online';
+
+  @override
+  String get capOffline => 'Offline';
+
+  @override
+  String get capTelemetry => 'Telemetry';
+
+  @override
+  String capTelemetryBackend(String name) {
+    return 'Backend: $name';
+  }
+
+  @override
+  String get capLogEvent => 'Log a test event';
+
+  @override
+  String get capEventLogged => 'Event logged.';
+
+  @override
+  String capPermissionStatus(String status) {
+    return 'Permission: $status';
+  }
+
+  @override
+  String get capPermissionGranted => 'granted';
+
+  @override
+  String get capPermissionNotGranted => 'not granted';
+
+  @override
+  String get capRequestPermission => 'Request permission';
+
+  @override
+  String get capShowNow => 'Show now';
+
+  @override
+  String get capScheduleReminder => 'Remind me in 10 seconds';
+
+  @override
+  String get capReminderScheduled => 'Reminder scheduled.';
+
+  @override
+  String get capReview => 'In-app review';
+
+  @override
+  String get capRequestReview => 'Request a review';
+
+  @override
+  String get capReviewUnavailable => 'Review is not available here.';
+
+  @override
+  String get capAds => 'Ads';
+
+  @override
+  String capAdsStatus(String available) {
+    return 'Ads available: $available';
+  }
+
+  @override
+  String get capShowInterstitial => 'Show interstitial';
+
+  @override
+  String get capShowRewarded => 'Show rewarded';
+
+  @override
+  String get capRecordAction => 'Record qualifying action';
+
+  @override
+  String capAdResult(String result) {
+    return 'Result: $result';
+  }
+
+  @override
+  String capPremiumStatus(String status) {
+    return 'Status: $status';
+  }
+
+  @override
+  String get capOpenPaywall => 'Open paywall';
+
+  @override
+  String get capResetPurchase => 'Reset demo purchase';
+
+  @override
+  String get capOnboarding => 'Onboarding';
+
+  @override
+  String get commonYes => 'yes';
+
+  @override
+  String get commonNo => 'no';
 }

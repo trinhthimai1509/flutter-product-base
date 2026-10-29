@@ -122,5 +122,144 @@
   "showcaseSendNotification": "Send in-app notification",
   "showcaseNotificationTitle": "Hello from the notification center",
   "showcaseNotificationBody": "In-app notifications are delivered through a replaceable service.",
-  "showcaseAttachments": "Attachments"
+  "showcaseAttachments": "Attachments",
+  "offlineBanner": "You're offline. Some features may not work.",
+  "onboardingSkip": "Skip",
+  "onboardingNext": "Next",
+  "onboardingFinish": "Get started",
+  "onboardingPageIndicator": "Page {current} of {total}",
+  "@onboardingPageIndicator": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingPage1Title": "A foundation, not a product",
+  "onboardingPage1Body": "Auth, networking, chat, settings and more, ready to build on.",
+  "onboardingPage2Title": "Pick what you need",
+  "onboardingPage2Body": "Ads, billing, notifications and telemetry are opt-in packages.",
+  "onboardingPage3Title": "Runs offline",
+  "onboardingPage3Body": "Fakes stand in for every backend and store until yours are ready.",
+  "premiumTitle": "Pro",
+  "premiumHeadline": "Go Pro",
+  "premiumSubtitle": "One purchase, yours forever.",
+  "premiumBenefitNoAds": "No ads",
+  "premiumBenefitFeatures": "Every premium feature",
+  "premiumBenefitSupport": "Support future development",
+  "premiumFootnote": "One-time purchase. No subscription.",
+  "premiumBuy": "Get Pro for {price}",
+  "@premiumBuy": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "premiumUnavailable": "Not available right now",
+  "premiumRestore": "Restore purchase",
+  "premiumOwned": "You have Pro. Thank you!",
+  "premiumPending": "Payment pending. Pro unlocks when it completes.",
+  "premiumMsgCompleted": "Welcome to Pro!",
+  "premiumMsgPending": "Payment pending.",
+  "premiumMsgAlreadyOwned": "You already own Pro.",
+  "premiumMsgRestored": "Purchase restored.",
+  "premiumMsgNothingToRestore": "No previous purchase found.",
+  "premiumMsgCouldNotCheck": "Couldn't reach the store. Try again.",
+  "premiumMsgFailed": "Purchase failed. You were not charged.",
+  "settingsDynamicColor": "Dynamic color",
+  "settingsDynamicColorSubtitle": "Use colors from your wallpaper",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsSubtitle": "Reminders and updates",
+  "settingsNotificationsDenied": "Notifications are blocked. Allow them in system settings.",
+  "settingsPremium": "Get Pro",
+  "settingsPremiumSubtitle": "Remove ads and unlock everything",
+  "settingsPremiumActive": "Pro is active",
+  "settingsPrivacyOptions": "Privacy options",
+  "settingsRateApp": "Rate this app",
+  "settingsShareApp": "Share this app",
+  "settingsShareMessage": "I'm using {appName}.",
+  "@settingsShareMessage": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsPrivacyPolicy": "Privacy policy",
+  "settingsReplayOnboarding": "Replay introduction",
+  "settingsLinkFailed": "Couldn't open the link.",
+  "homeCapabilitiesTitle": "Capabilities",
+  "homeCapabilitiesSubtitle": "Ads, billing, notifications, review, telemetry",
+  "notificationChannelReminders": "Reminders",
+  "notificationChannelRemindersDescription": "Reminders you schedule in the app",
+  "notificationDemoTitle": "Hello from Flutter Base",
+  "notificationDemoBody": "Tap to open the capabilities demo.",
+  "capConnectivity": "Connectivity",
+  "capOnline": "Online",
+  "capOffline": "Offline",
+  "capTelemetry": "Telemetry",
+  "capTelemetryBackend": "Backend: {name}",
+  "@capTelemetryBackend": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "capLogEvent": "Log a test event",
+  "capEventLogged": "Event logged.",
+  "capPermissionStatus": "Permission: {status}",
+  "@capPermissionStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "capPermissionGranted": "granted",
+  "capPermissionNotGranted": "not granted",
+  "capRequestPermission": "Request permission",
+  "capShowNow": "Show now",
+  "capScheduleReminder": "Remind me in 10 seconds",
+  "capReminderScheduled": "Reminder scheduled.",
+  "capReview": "In-app review",
+  "capRequestReview": "Request a review",
+  "capReviewUnavailable": "Review is not available here.",
+  "capAds": "Ads",
+  "capAdsStatus": "Ads available: {available}",
+  "@capAdsStatus": {
+    "placeholders": {
+      "available": {
+        "type": "String"
+      }
+    }
+  },
+  "capShowInterstitial": "Show interstitial",
+  "capShowRewarded": "Show rewarded",
+  "capRecordAction": "Record qualifying action",
+  "capAdResult": "Result: {result}",
+  "@capAdResult": {
+    "placeholders": {
+      "result": {
+        "type": "String"
+      }
+    }
+  },
+  "capPremiumStatus": "Status: {status}",
+  "@capPremiumStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "capOpenPaywall": "Open paywall",
+  "capResetPurchase": "Reset demo purchase",
+  "capOnboarding": "Onboarding",
+  "commonYes": "yes",
+  "commonNo": "no"
 }

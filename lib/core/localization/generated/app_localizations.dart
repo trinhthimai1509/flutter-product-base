@@ -667,6 +667,486 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Attachments'**
   String get showcaseAttachments;
+
+  /// No description provided for @offlineBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re offline. Some features may not work.'**
+  String get offlineBanner;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingFinish.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get onboardingFinish;
+
+  /// No description provided for @onboardingPageIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {current} of {total}'**
+  String onboardingPageIndicator(int current, int total);
+
+  /// No description provided for @onboardingPage1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'A foundation, not a product'**
+  String get onboardingPage1Title;
+
+  /// No description provided for @onboardingPage1Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Auth, networking, chat, settings and more, ready to build on.'**
+  String get onboardingPage1Body;
+
+  /// No description provided for @onboardingPage2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick what you need'**
+  String get onboardingPage2Title;
+
+  /// No description provided for @onboardingPage2Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads, billing, notifications and telemetry are opt-in packages.'**
+  String get onboardingPage2Body;
+
+  /// No description provided for @onboardingPage3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Runs offline'**
+  String get onboardingPage3Title;
+
+  /// No description provided for @onboardingPage3Body.
+  ///
+  /// In en, this message translates to:
+  /// **'Fakes stand in for every backend and store until yours are ready.'**
+  String get onboardingPage3Body;
+
+  /// No description provided for @premiumTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro'**
+  String get premiumTitle;
+
+  /// No description provided for @premiumHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Pro'**
+  String get premiumHeadline;
+
+  /// No description provided for @premiumSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'One purchase, yours forever.'**
+  String get premiumSubtitle;
+
+  /// No description provided for @premiumBenefitNoAds.
+  ///
+  /// In en, this message translates to:
+  /// **'No ads'**
+  String get premiumBenefitNoAds;
+
+  /// No description provided for @premiumBenefitFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Every premium feature'**
+  String get premiumBenefitFeatures;
+
+  /// No description provided for @premiumBenefitSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Support future development'**
+  String get premiumBenefitSupport;
+
+  /// No description provided for @premiumFootnote.
+  ///
+  /// In en, this message translates to:
+  /// **'One-time purchase. No subscription.'**
+  String get premiumFootnote;
+
+  /// No description provided for @premiumBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Pro for {price}'**
+  String premiumBuy(String price);
+
+  /// No description provided for @premiumUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available right now'**
+  String get premiumUnavailable;
+
+  /// No description provided for @premiumRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchase'**
+  String get premiumRestore;
+
+  /// No description provided for @premiumOwned.
+  ///
+  /// In en, this message translates to:
+  /// **'You have Pro. Thank you!'**
+  String get premiumOwned;
+
+  /// No description provided for @premiumPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment pending. Pro unlocks when it completes.'**
+  String get premiumPending;
+
+  /// No description provided for @premiumMsgCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Pro!'**
+  String get premiumMsgCompleted;
+
+  /// No description provided for @premiumMsgPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment pending.'**
+  String get premiumMsgPending;
+
+  /// No description provided for @premiumMsgAlreadyOwned.
+  ///
+  /// In en, this message translates to:
+  /// **'You already own Pro.'**
+  String get premiumMsgAlreadyOwned;
+
+  /// No description provided for @premiumMsgRestored.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase restored.'**
+  String get premiumMsgRestored;
+
+  /// No description provided for @premiumMsgNothingToRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'No previous purchase found.'**
+  String get premiumMsgNothingToRestore;
+
+  /// No description provided for @premiumMsgCouldNotCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach the store. Try again.'**
+  String get premiumMsgCouldNotCheck;
+
+  /// No description provided for @premiumMsgFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Purchase failed. You were not charged.'**
+  String get premiumMsgFailed;
+
+  /// No description provided for @settingsDynamicColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Dynamic color'**
+  String get settingsDynamicColor;
+
+  /// No description provided for @settingsDynamicColorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use colors from your wallpaper'**
+  String get settingsDynamicColorSubtitle;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsNotificationsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders and updates'**
+  String get settingsNotificationsSubtitle;
+
+  /// No description provided for @settingsNotificationsDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are blocked. Allow them in system settings.'**
+  String get settingsNotificationsDenied;
+
+  /// No description provided for @settingsPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Pro'**
+  String get settingsPremium;
+
+  /// No description provided for @settingsPremiumSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove ads and unlock everything'**
+  String get settingsPremiumSubtitle;
+
+  /// No description provided for @settingsPremiumActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Pro is active'**
+  String get settingsPremiumActive;
+
+  /// No description provided for @settingsPrivacyOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy options'**
+  String get settingsPrivacyOptions;
+
+  /// No description provided for @settingsRateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate this app'**
+  String get settingsRateApp;
+
+  /// No description provided for @settingsShareApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Share this app'**
+  String get settingsShareApp;
+
+  /// No description provided for @settingsShareMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m using {appName}.'**
+  String settingsShareMessage(String appName);
+
+  /// No description provided for @settingsPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy policy'**
+  String get settingsPrivacyPolicy;
+
+  /// No description provided for @settingsReplayOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay introduction'**
+  String get settingsReplayOnboarding;
+
+  /// No description provided for @settingsLinkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the link.'**
+  String get settingsLinkFailed;
+
+  /// No description provided for @homeCapabilitiesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Capabilities'**
+  String get homeCapabilitiesTitle;
+
+  /// No description provided for @homeCapabilitiesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads, billing, notifications, review, telemetry'**
+  String get homeCapabilitiesSubtitle;
+
+  /// No description provided for @notificationChannelReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get notificationChannelReminders;
+
+  /// No description provided for @notificationChannelRemindersDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders you schedule in the app'**
+  String get notificationChannelRemindersDescription;
+
+  /// No description provided for @notificationDemoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello from Flutter Base'**
+  String get notificationDemoTitle;
+
+  /// No description provided for @notificationDemoBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to open the capabilities demo.'**
+  String get notificationDemoBody;
+
+  /// No description provided for @capConnectivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Connectivity'**
+  String get capConnectivity;
+
+  /// No description provided for @capOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get capOnline;
+
+  /// No description provided for @capOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get capOffline;
+
+  /// No description provided for @capTelemetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Telemetry'**
+  String get capTelemetry;
+
+  /// No description provided for @capTelemetryBackend.
+  ///
+  /// In en, this message translates to:
+  /// **'Backend: {name}'**
+  String capTelemetryBackend(String name);
+
+  /// No description provided for @capLogEvent.
+  ///
+  /// In en, this message translates to:
+  /// **'Log a test event'**
+  String get capLogEvent;
+
+  /// No description provided for @capEventLogged.
+  ///
+  /// In en, this message translates to:
+  /// **'Event logged.'**
+  String get capEventLogged;
+
+  /// No description provided for @capPermissionStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission: {status}'**
+  String capPermissionStatus(String status);
+
+  /// No description provided for @capPermissionGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'granted'**
+  String get capPermissionGranted;
+
+  /// No description provided for @capPermissionNotGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'not granted'**
+  String get capPermissionNotGranted;
+
+  /// No description provided for @capRequestPermission.
+  ///
+  /// In en, this message translates to:
+  /// **'Request permission'**
+  String get capRequestPermission;
+
+  /// No description provided for @capShowNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show now'**
+  String get capShowNow;
+
+  /// No description provided for @capScheduleReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Remind me in 10 seconds'**
+  String get capScheduleReminder;
+
+  /// No description provided for @capReminderScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder scheduled.'**
+  String get capReminderScheduled;
+
+  /// No description provided for @capReview.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app review'**
+  String get capReview;
+
+  /// No description provided for @capRequestReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a review'**
+  String get capRequestReview;
+
+  /// No description provided for @capReviewUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Review is not available here.'**
+  String get capReviewUnavailable;
+
+  /// No description provided for @capAds.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads'**
+  String get capAds;
+
+  /// No description provided for @capAdsStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Ads available: {available}'**
+  String capAdsStatus(String available);
+
+  /// No description provided for @capShowInterstitial.
+  ///
+  /// In en, this message translates to:
+  /// **'Show interstitial'**
+  String get capShowInterstitial;
+
+  /// No description provided for @capShowRewarded.
+  ///
+  /// In en, this message translates to:
+  /// **'Show rewarded'**
+  String get capShowRewarded;
+
+  /// No description provided for @capRecordAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Record qualifying action'**
+  String get capRecordAction;
+
+  /// No description provided for @capAdResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Result: {result}'**
+  String capAdResult(String result);
+
+  /// No description provided for @capPremiumStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status: {status}'**
+  String capPremiumStatus(String status);
+
+  /// No description provided for @capOpenPaywall.
+  ///
+  /// In en, this message translates to:
+  /// **'Open paywall'**
+  String get capOpenPaywall;
+
+  /// No description provided for @capResetPurchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset demo purchase'**
+  String get capResetPurchase;
+
+  /// No description provided for @capOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Onboarding'**
+  String get capOnboarding;
+
+  /// No description provided for @commonYes.
+  ///
+  /// In en, this message translates to:
+  /// **'yes'**
+  String get commonYes;
+
+  /// No description provided for @commonNo.
+  ///
+  /// In en, this message translates to:
+  /// **'no'**
+  String get commonNo;
 }
 
 class _AppLocalizationsDelegate

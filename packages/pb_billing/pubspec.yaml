@@ -1,0 +1,20 @@
+name: pb_billing
+description: "Store billing for one lifetime Pro purchase; publishes PremiumState."
+publish_to: 'none'
+version: 0.1.0
+resolution: workspace
+
+environment:
+  sdk: ^3.13.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  in_app_purchase: ^3.3.1
+  pb_common:
+    path: ../pb_common
+
+dev_dependencies:
+  flutter_lints: ^6.0.0
+  flutter_test:
+    sdk: flutter

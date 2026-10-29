@@ -3,12 +3,15 @@ import '../../core/navigation/route_access.dart';
 /// Route paths in one place. Use these constants instead of string literals.
 abstract final class AppRoutes {
   static const splash = '/splash';
+  static const onboarding = '/onboarding';
   static const signIn = '/sign-in';
   static const home = '/home';
   static const chat = '/home/chat';
   static const settings = '/home/settings';
   static const profile = '/home/profile';
   static const showcase = '/home/showcase';
+  static const capabilities = '/home/capabilities';
+  static const premium = '/home/premium';
 
   static String conversation(String id) => '$chat/${Uri.encodeComponent(id)}';
 
@@ -16,6 +19,7 @@ abstract final class AppRoutes {
   /// Unlisted paths default to [RouteAccess.signedIn].
   static const access = <String, RouteAccess>{
     splash: RouteAccess.public,
+    onboarding: RouteAccess.public,
     signIn: RouteAccess.signedOutOnly,
     home: RouteAccess.signedIn,
   };

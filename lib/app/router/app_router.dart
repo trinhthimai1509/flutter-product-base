@@ -4,13 +4,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/auth/session_status.dart';
+import '../../core/capabilities/capability_providers.dart';
 import '../../core/navigation/route_access.dart';
 import '../../features/auth/application/auth_providers.dart';
 import '../../features/auth/presentation/sign_in_page.dart';
 import '../../features/chat/presentation/conversation_list_page.dart';
 import '../../features/chat/presentation/conversation_page.dart';
+import '../../features/home/presentation/capabilities_page.dart';
 import '../../features/home/presentation/foundation_showcase_page.dart';
 import '../../features/home/presentation/home_page.dart';
+import '../../features/onboarding/application/onboarding_providers.dart';
+import '../../features/onboarding/presentation/onboarding_page.dart';
+import '../../features/premium/presentation/premium_page.dart';
 import '../../features/profile/presentation/profile_page.dart';
 import '../../features/settings/presentation/settings_page.dart';
 import '../pages.dart';
@@ -38,18 +43,42 @@ final routerProvider = Provider<GoRouter>((ref) {
     ..listen(sessionStatusProvider, (_, next) => refresh.value = next)
     ..onDispose(refresh.dispose);
 
+  final onboardingEnabled = ref.watch(onboardingEnabledProvider);
+  final onboarding = ref.watch(onboardingControllerProvider);
+
+  String? redirect(Uri location) {
+    final needsOnboarding = onboardingEnabled && !onboarding.isCompleted;
+    // Onboarding comes first, but only once the session is known, so the
+    // splash still covers start-up.
+    if (refresh.value != SessionStatus.unknown) {
+      if (needsOnboarding && location.path != AppRoutes.onboarding) {
+        return AppRoutes.onboarding;
+      }
+      if (!needsOnboarding && location.path == AppRoutes.onboarding) {
+        return guard.redirect(
+          status: refresh.value,
+          location: Uri(path: AppRoutes.splash),
+        );
+      }
+    }
+    return guard.redirect(status: refresh.value, location: location);
+  }
+
   final router = GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.splash,
     debugLogDiagnostics: kDebugMode,
-    refreshListenable: refresh,
-    redirect: (context, state) =>
-        guard.redirect(status: refresh.value, location: state.uri),
+    refreshListenable: Listenable.merge([refresh, onboarding]),
+    redirect: (context, state) => redirect(state.uri),
     errorBuilder: (context, state) => const NotFoundPage(),
     routes: [
       GoRoute(
         path: AppRoutes.splash,
         builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.onboarding,
+        builder: (context, state) => const OnboardingPage(),
       ),
       GoRoute(
         path: AppRoutes.signIn,
@@ -83,10 +112,39 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: 'showcase',
             builder: (context, state) => const FoundationShowcasePage(),
           ),
+          GoRoute(
+            path: 'capabilities',
+            builder: (context, state) => const CapabilitiesPage(),
+          ),
+          GoRoute(
+            path: 'premium',
+            builder: (context, state) => const PremiumPage(),
+          ),
         ],
       ),
     ],
   );
-  ref.onDispose(router.dispose);
+
+  // Screen views use the route pattern (`/home/chat/:conversationId`), so
+  // ids never reach analytics.
+  final analytics = ref.watch(analyticsProvider);
+  String? lastScreen;
+  void logScreen() {
+    final config = router.routerDelegate.currentConfiguration;
+    // Pushed pages live in an ImperativeRouteMatch on top of the stack.
+    final top = config.lastOrNull;
+    final screen = top is ImperativeRouteMatch
+        ? top.matches.fullPath
+        : config.fullPath;
+    if (screen.isEmpty || screen == lastScreen) return;
+    lastScreen = screen;
+    analytics.logScreenView(screen);
+  }
+
+  router.routerDelegate.addListener(logScreen);
+  ref.onDispose(() {
+    router.routerDelegate.removeListener(logScreen);
+    router.dispose();
+  });
   return router;
 });

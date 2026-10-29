@@ -36,6 +36,12 @@ class HomePage extends ConsumerWidget {
         AppRoutes.showcase,
       ),
       _HomeItem(
+        Icons.extension_outlined,
+        l10n.homeCapabilitiesTitle,
+        l10n.homeCapabilitiesSubtitle,
+        AppRoutes.capabilities,
+      ),
+      _HomeItem(
         Icons.person_outline,
         l10n.homeProfileTitle,
         l10n.homeProfileSubtitle,

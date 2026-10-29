@@ -5,7 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:pb_telemetry/pb_telemetry.dart';
+import 'package:pb_telemetry_firebase/pb_telemetry_firebase.dart';
 
+import '../../core/capabilities/capability_providers.dart';
 import '../../core/config/app_config.dart';
 import '../../core/di/core_providers.dart';
 import '../../core/logging/app_logger.dart';
@@ -23,6 +26,8 @@ Future<void> bootstrap({
 
   final appConfig = config ?? AppConfig.fromEnvironment();
   final logger = DeveloperLogger();
+  final telemetry = await _initTelemetry(appConfig, logger);
+  final crashReporter = telemetry.crashReporter;
 
   FlutterError.onError = (details) {
     logger.error(
@@ -30,6 +35,13 @@ Future<void> bootstrap({
       tag: 'flutter',
       error: details.exception,
       stackTrace: details.stack,
+    );
+    unawaited(
+      crashReporter.recordError(
+        details.exception,
+        details.stack,
+        reason: details.context?.toDescription(),
+      ),
     );
     if (kDebugMode) FlutterError.presentError(details);
   };
@@ -40,6 +52,7 @@ Future<void> bootstrap({
       error: error,
       stackTrace: stack,
     );
+    unawaited(crashReporter.recordError(error, stack, fatal: true));
     return true;
   };
 
@@ -54,11 +67,20 @@ Future<void> bootstrap({
         appLoggerProvider.overrideWithValue(logger),
         keyValueStoreProvider.overrideWithValue(keyValueStore),
         accessTokenSourceProvider.overrideWith(AuthTokenSource.new),
+        telemetryProvider.overrideWithValue(telemetry),
         ...overrides,
       ],
       child: const App(),
     ),
   );
+}
+
+/// Firebase only when enabled; otherwise (or when it is not configured)
+/// telemetry is a no-op. Pass `options: DefaultFirebaseOptions.currentPlatform`
+/// here after running `flutterfire configure`.
+Future<Telemetry> _initTelemetry(AppConfig config, AppLogger logger) async {
+  if (!config.enableFirebase) return Telemetry.noOp;
+  return FirebaseTelemetry.initialize(logger: AppPbLogger(logger));
 }
 
 Future<AppInfo> _loadAppInfo() async {

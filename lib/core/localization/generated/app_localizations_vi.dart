@@ -313,4 +313,269 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get showcaseAttachments => 'Tệp đính kèm';
+
+  @override
+  String get offlineBanner =>
+      'Bạn đang ngoại tuyến. Một số tính năng có thể không hoạt động.';
+
+  @override
+  String get onboardingSkip => 'Bỏ qua';
+
+  @override
+  String get onboardingNext => 'Tiếp';
+
+  @override
+  String get onboardingFinish => 'Bắt đầu';
+
+  @override
+  String onboardingPageIndicator(int current, int total) {
+    return 'Trang $current/$total';
+  }
+
+  @override
+  String get onboardingPage1Title => 'Nền móng, không phải sản phẩm';
+
+  @override
+  String get onboardingPage1Body =>
+      'Đăng nhập, mạng, chat, cài đặt và nhiều hơn nữa, sẵn sàng để xây tiếp.';
+
+  @override
+  String get onboardingPage2Title => 'Chọn đúng thứ bạn cần';
+
+  @override
+  String get onboardingPage2Body =>
+      'Quảng cáo, thanh toán, thông báo và telemetry là các package tùy chọn.';
+
+  @override
+  String get onboardingPage3Title => 'Chạy không cần server';
+
+  @override
+  String get onboardingPage3Body =>
+      'Bản giả lập thay cho backend và store cho đến khi bạn có hệ thống thật.';
+
+  @override
+  String get premiumTitle => 'Pro';
+
+  @override
+  String get premiumHeadline => 'Nâng cấp Pro';
+
+  @override
+  String get premiumSubtitle => 'Mua một lần, dùng mãi mãi.';
+
+  @override
+  String get premiumBenefitNoAds => 'Không quảng cáo';
+
+  @override
+  String get premiumBenefitFeatures => 'Mọi tính năng cao cấp';
+
+  @override
+  String get premiumBenefitSupport => 'Ủng hộ phát triển ứng dụng';
+
+  @override
+  String get premiumFootnote => 'Thanh toán một lần. Không gia hạn.';
+
+  @override
+  String premiumBuy(String price) {
+    return 'Mua Pro với giá $price';
+  }
+
+  @override
+  String get premiumUnavailable => 'Hiện chưa thể mua';
+
+  @override
+  String get premiumRestore => 'Khôi phục giao dịch';
+
+  @override
+  String get premiumOwned => 'Bạn đã có Pro. Cảm ơn bạn!';
+
+  @override
+  String get premiumPending =>
+      'Thanh toán đang chờ xử lý. Pro sẽ mở khi hoàn tất.';
+
+  @override
+  String get premiumMsgCompleted => 'Chào mừng bạn đến với Pro!';
+
+  @override
+  String get premiumMsgPending => 'Thanh toán đang chờ xử lý.';
+
+  @override
+  String get premiumMsgAlreadyOwned => 'Bạn đã sở hữu Pro.';
+
+  @override
+  String get premiumMsgRestored => 'Đã khôi phục giao dịch.';
+
+  @override
+  String get premiumMsgNothingToRestore => 'Không tìm thấy giao dịch trước đó.';
+
+  @override
+  String get premiumMsgCouldNotCheck =>
+      'Không kết nối được cửa hàng. Vui lòng thử lại.';
+
+  @override
+  String get premiumMsgFailed => 'Giao dịch thất bại. Bạn chưa bị trừ tiền.';
+
+  @override
+  String get settingsDynamicColor => 'Màu động';
+
+  @override
+  String get settingsDynamicColorSubtitle => 'Dùng màu theo hình nền';
+
+  @override
+  String get settingsNotifications => 'Thông báo';
+
+  @override
+  String get settingsNotificationsSubtitle => 'Nhắc nhở và cập nhật';
+
+  @override
+  String get settingsNotificationsDenied =>
+      'Thông báo đang bị chặn. Hãy cho phép trong cài đặt hệ thống.';
+
+  @override
+  String get settingsPremium => 'Nâng cấp Pro';
+
+  @override
+  String get settingsPremiumSubtitle => 'Bỏ quảng cáo và mở khóa mọi tính năng';
+
+  @override
+  String get settingsPremiumActive => 'Đã kích hoạt Pro';
+
+  @override
+  String get settingsPrivacyOptions => 'Tùy chọn quyền riêng tư';
+
+  @override
+  String get settingsRateApp => 'Đánh giá ứng dụng';
+
+  @override
+  String get settingsShareApp => 'Chia sẻ ứng dụng';
+
+  @override
+  String settingsShareMessage(String appName) {
+    return 'Mình đang dùng $appName.';
+  }
+
+  @override
+  String get settingsPrivacyPolicy => 'Chính sách quyền riêng tư';
+
+  @override
+  String get settingsReplayOnboarding => 'Xem lại giới thiệu';
+
+  @override
+  String get settingsLinkFailed => 'Không mở được liên kết.';
+
+  @override
+  String get homeCapabilitiesTitle => 'Tính năng mở rộng';
+
+  @override
+  String get homeCapabilitiesSubtitle =>
+      'Quảng cáo, thanh toán, thông báo, đánh giá, telemetry';
+
+  @override
+  String get notificationChannelReminders => 'Nhắc nhở';
+
+  @override
+  String get notificationChannelRemindersDescription =>
+      'Các lời nhắc bạn đặt trong ứng dụng';
+
+  @override
+  String get notificationDemoTitle => 'Xin chào từ Flutter Base';
+
+  @override
+  String get notificationDemoBody => 'Chạm để mở trang tính năng mở rộng.';
+
+  @override
+  String get capConnectivity => 'Kết nối mạng';
+
+  @override
+  String get capOnline => 'Đang trực tuyến';
+
+  @override
+  String get capOffline => 'Ngoại tuyến';
+
+  @override
+  String get capTelemetry => 'Telemetry';
+
+  @override
+  String capTelemetryBackend(String name) {
+    return 'Backend: $name';
+  }
+
+  @override
+  String get capLogEvent => 'Ghi sự kiện thử';
+
+  @override
+  String get capEventLogged => 'Đã ghi sự kiện.';
+
+  @override
+  String capPermissionStatus(String status) {
+    return 'Quyền: $status';
+  }
+
+  @override
+  String get capPermissionGranted => 'đã cấp';
+
+  @override
+  String get capPermissionNotGranted => 'chưa cấp';
+
+  @override
+  String get capRequestPermission => 'Xin quyền';
+
+  @override
+  String get capShowNow => 'Hiện ngay';
+
+  @override
+  String get capScheduleReminder => 'Nhắc sau 10 giây';
+
+  @override
+  String get capReminderScheduled => 'Đã đặt lời nhắc.';
+
+  @override
+  String get capReview => 'Đánh giá trong ứng dụng';
+
+  @override
+  String get capRequestReview => 'Yêu cầu đánh giá';
+
+  @override
+  String get capReviewUnavailable => 'Không thể đánh giá trên thiết bị này.';
+
+  @override
+  String get capAds => 'Quảng cáo';
+
+  @override
+  String capAdsStatus(String available) {
+    return 'Có quảng cáo: $available';
+  }
+
+  @override
+  String get capShowInterstitial => 'Hiện quảng cáo toàn màn hình';
+
+  @override
+  String get capShowRewarded => 'Hiện quảng cáo có thưởng';
+
+  @override
+  String get capRecordAction => 'Ghi nhận hành động';
+
+  @override
+  String capAdResult(String result) {
+    return 'Kết quả: $result';
+  }
+
+  @override
+  String capPremiumStatus(String status) {
+    return 'Trạng thái: $status';
+  }
+
+  @override
+  String get capOpenPaywall => 'Mở trang Pro';
+
+  @override
+  String get capResetPurchase => 'Đặt lại giao dịch demo';
+
+  @override
+  String get capOnboarding => 'Giới thiệu';
+
+  @override
+  String get commonYes => 'có';
+
+  @override
+  String get commonNo => 'không';
 }

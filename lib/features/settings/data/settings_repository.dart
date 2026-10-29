@@ -10,6 +10,8 @@ class SettingsRepository {
 
   static const themeModeKey = 'settings.themeMode';
   static const localeKey = 'settings.locale';
+  static const dynamicColorKey = 'settings.dynamicColor';
+  static const notificationsKey = 'settings.notifications';
 
   final KeyValueStore _store;
 
@@ -22,6 +24,8 @@ class SettingsRepository {
         orElse: () => ThemeMode.system,
       ),
       locale: AppLocales.fromCode(_store.getString(localeKey)),
+      useDynamicColor: _store.getBool(dynamicColorKey) ?? true,
+      notificationsEnabled: _store.getBool(notificationsKey) ?? true,
     );
   }
 
@@ -31,4 +35,10 @@ class SettingsRepository {
   Future<void> saveLocale(Locale? locale) => locale == null
       ? _store.remove(localeKey)
       : _store.setString(localeKey, locale.languageCode);
+
+  Future<void> saveUseDynamicColor(bool value) =>
+      _store.setBool(dynamicColorKey, value);
+
+  Future<void> saveNotificationsEnabled(bool value) =>
+      _store.setBool(notificationsKey, value);
 }

@@ -47,4 +47,20 @@ void main() {
     expect(settings.themeMode, ThemeMode.system);
     expect(settings.locale, isNull);
   });
+
+  test('dynamic color and notifications default on and persist', () async {
+    final store = InMemoryKeyValueStore();
+    final first = createTestContainer(keyValueStore: store);
+    expect(first.read(settingsControllerProvider).useDynamicColor, isTrue);
+    expect(first.read(settingsControllerProvider).notificationsEnabled, isTrue);
+
+    final controller = first.read(settingsControllerProvider.notifier);
+    await controller.setUseDynamicColor(false);
+    await controller.setNotificationsEnabled(false);
+
+    final restored = createTestContainer(keyValueStore: store)
+        .read(settingsControllerProvider);
+    expect(restored.useDynamicColor, isFalse);
+    expect(restored.notificationsEnabled, isFalse);
+  });
 }

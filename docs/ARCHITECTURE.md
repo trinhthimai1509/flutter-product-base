@@ -211,5 +211,37 @@ Domain and UI are unaffected.
 | chat | `ChatProvider`, `ChatRepository`, `chatProviderProvider`, `conversationControllerProvider`, chat widgets |
 | home | demo only — replace in real apps |
 
+| onboarding | `onboardingControllerProvider`, `onboardingEnabledProvider`, `OnboardingPage` |
+| premium | `PremiumPage` (paywall over `pb_premium`) |
+
 Removing a feature: delete its folder, its routes in `app_router.dart`, its
 links in `HomePage`, and any overrides in bootstrap.
+
+## Capability packages
+
+Opt-in capabilities live in a Dart pub **workspace** under `packages/`
+(root `pubspec.yaml` › `workspace:`), one package per capability:
+`pb_common`, `pb_telemetry`, `pb_telemetry_firebase`, `pb_connectivity`,
+`pb_onboarding`, `pb_notifications`, `pb_review`, `pb_billing`,
+`pb_premium`, `pb_ads`. One `flutter pub get` at the root resolves all of
+them; each has its own tests.
+
+```
+packages/pb_*  (plain Dart/Flutter: contract + plugin impl + fake)
+      ▲
+lib/core/capabilities/capability_providers.dart   (Riverpod wiring, the only place)
+      ▲
+lib/app (CapabilitiesScope, router, bootstrap)  ·  lib/features (settings, premium, onboarding)
+```
+
+- Packages never import the app and never use Riverpod, so a product can
+  take any one of them alone (path or git dependency).
+- `PremiumState` (`pb_common`) is the seam between selling (`pb_billing`)
+  and reacting (`pb_ads`, features).
+- `CapabilitiesScope` (in `MaterialApp.builder`) starts notifications and
+  ads after the first frame, routes notification taps, and shows the
+  offline banner.
+- Tests run every package on its fake via `baseTestOverrides`.
+
+APIs, wiring and native setup per package: [MODULE_CATALOG.md](MODULE_CATALOG.md).
+Ads and purchases: [MONETIZATION.md](MONETIZATION.md).
